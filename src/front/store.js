@@ -1,3 +1,14 @@
+
+const host = 'https://playground.4geeks.com/todo';
+const user = 'Halber1';
+
+
+
+
+
+
+
+
 export const initialStore=()=>{
   return{
     message: null,
