@@ -1,29 +1,20 @@
 import { useEffect, useState } from "react";
-import { getTodos, addTodo, modifyTodo, deleteTodo } from "../services/todos.js";
-
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
-export const TodoListFetch = () => {
-  const [ todos, setTodos ] = useState([]);
-
-    useEffect(() => {
-      const get = async => {
-       await getTodos()
-  }
-  get()
-}, [])
-
+export const TodoListFetchCopy = () => {
+  const host = 'https://playground.4geeks.com/todo';
+  const user = 'Halber1';
 
   const [ newTask, setNewTask ] = useState('');
   const [ editTask, setEditTask ] = useState('');
   const [ editCompleted, setEditCompleted ] = useState()
   const [ isEdit, setIsEdit ] = useState(false);
   const [ editTodo, setEditTodo ] = useState({})
+  const [ todos, setTodos ] = useState([]);
 
   const handleNewTask = event => setNewTask(event.target.value);
   const handleEditTask = event => setEditTask(event.target.value);
@@ -71,8 +62,83 @@ export const TodoListFetch = () => {
     setEditCompleted('false')
   }
   
+  const getTodos = async () => {
+    const uri = `${host}/users/${user}`
+    const options = {method: 'GET'}
+    try {
+      const response = await fetch(uri, options);
+      if (!response.ok) {
+        console.log('Error', response.status)
+        if (response.status == 404) {
+         // tengo que crear el usuario
+         addUser(); 
+        }
+        return
+      } 
+      const data = await response.json()
+      console.log(data)
+      setTodos(data.todos)
+     } catch {
+      console.log('error')
+    }
+  }
+
+  const addUser = async () => {
+      const uri = `${host}/users/${user}`
+      const options = {method: 'POST'}
+      const response = await fetch(uri, options )
+  }
+
+  const addTodo = async (dataToSend) => {
+    const uri = `${host}/todos/${user}`;
+    const options = {
+      method: 'POST',
+      headers: {
+        "Content-Type": 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
+    }
+    try {
+      const response = await fetch(uri, options)
+      getTodos();
+    } catch {
+      console.log('error')
+    }
+  }
+
+  const modifyTodo = async (id, dataToSend) => {
+     const uri = `${host}/todos/${id}`;
+     const options = {
+      method: 'PUT',
+      headers: {
+        "Content-type": 'application/json'
+      },
+      body: JSON.stringify(dataToSend)
+     };
+     try{
+      const response = await fetch(uri, options)
+      getTodos()
+     } catch {
+       console.log('error'); 
+     }
+  }
+
+  const deleteTodo = async (id) => {
+    const uri = `${host}/todos/${id}`;
+    const options = {method: 'DELETE'}
+    try {
+      const response = await fetch(uri, options)
+      getTodos();
+    } catch {
+      console.log('error')
+    }
+  }
 
 
+  useEffect(() => {
+    // Inicialmente tengo que traer los todos de mi "usuario" de la APPI ()
+    getTodos()
+  }, [])
 
   return (
     <div className="container my-5">

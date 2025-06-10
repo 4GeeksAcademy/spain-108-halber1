@@ -1,10 +1,10 @@
 
 
-  const host = 'https://playground.4geeks.com/todo';
-  const user = 'Halber1';
+const host = 'https://playground.4geeks.com/todo';
+const user = 'Halber1';
 
-  
- export const getTodos = async () => {
+
+export const getTodos = async () => {
     const uri = `${host}/users/${user}`
     const options = {method: 'GET'}
     try {
@@ -25,13 +25,13 @@
     }
   }
 
-  export const addUser = async () => {
+export const addUser = async () => {
       const uri = `${host}/users/${user}`
       const options = {method: 'POST'}
       const response = await fetch(uri, options )
   }
 
-  export const addTodo = async (dataToSend) => {
+export const addTodo = async (dataToSend) => {
     const uri = `${host}/todos/${user}`;
     const options = {
       method: 'POST',
@@ -48,7 +48,7 @@
     }
   }
 
-  export const modifyTodo = async (id, dataToSend) => {
+export const modifyTodo = async (id, dataToSend) => {
      const uri = `${host}/todos/${id}`;
      const options = {
       method: 'PUT',
@@ -65,7 +65,7 @@
      }
   }
 
-  export const deleteTodo = async (id) => {
+export const deleteTodo = async (id) => {
     const uri = `${host}/todos/${id}`;
     const options = {method: 'DELETE'}
     try {
