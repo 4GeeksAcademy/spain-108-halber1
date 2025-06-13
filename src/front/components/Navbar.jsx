@@ -1,28 +1,37 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
 
+// 2.- Creo el componente (función)
 export const Navbar = () => {
+  const { store } = useGlobalReducer()
+  const navigate = useNavigate()
 
-	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Logo</span>
-				</Link>
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Characters</span>
-				</Link>
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Planets</span>
-				</Link>
-				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Starships</span>
-				</Link>
-				<div className="ml-auto">
-					<Link to="/demo">
-						<button className="btn btn-primary">Contacts</button>
-					</Link>
-				</div>
-			</div>
-		</nav>
-	);
-};
+
+ 
+  // 4.- Retorno un solo elemento HTML 
+  return (
+    <div>
+      <nav className="navbar navbar-expand-md bg-body-tertiary">
+        <div className="container-fluid">
+          <Link className="navbar-brand" to="/">{"Logo"}</Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link className="nav-link" aria-current="page" to="/">Personajes</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/contact">Contact</Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  )
+}
+
+// 5.- Exporto mi componente
+export default Navbar;
