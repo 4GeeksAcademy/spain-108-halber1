@@ -27,8 +27,18 @@ class Users(db.Model):
         title = db.Colum(db.String, nullable=False)
         description = db.Colum(db.String)
         body = db.Colum(db.String)
-        date = db.Colum()
-        image_url = db.Colum()
+        date = db.Colum(db.Date, nullable=False)
+        image_url = db.Colum(db.String)
+        user_id = db.Colum(db.Integer, db.ForeignaKey('users.id'))
+        user_to = db.relationship(
+            'Users', back_populates="posts_to", lazy='select')
         
+        def __repr__(self):
+            return f'<User {self.id}>'
+    
+
+    class Media(db.Model):
+        _tablename_ = 'media'
+        id = db.Colum
 
     
