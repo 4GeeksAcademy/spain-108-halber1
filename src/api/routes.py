@@ -8,7 +8,8 @@ from flask_cors import CORS
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
-additional_claims = get_jwt()  # Los datos adicionales
+from flask_jwt_extended import get_jwt
+
 
 api = Blueprint('api', __name__)
 
@@ -31,6 +32,7 @@ def handle_hello():
 @api.route("/login", methods=["POST"])
 def login():
     response_body = {}
+    data = request.json 
     username = request.json.get("username", None)
     email = data.get("email", None).lower()
     password = request.json.get("password", None)
@@ -44,10 +46,9 @@ def login():
 
     claims = {'user_id': user[id]}
 
-    access_token = create_access_token(identity=username)
-
+    access_token = create_access_token(identity=username, additional_claims=claims)
     response_body['message'] = 'User logged ok'  
-    response_body =['access_token'] = access_token
+    response_body['access_token'] = access_token
     return response_body, 200
 
 # Protect a route with jwt_required, which will kick out requests
@@ -59,4 +60,5 @@ def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     additional_claims = get_jwt()  # Los datos adicionales
-    return jsonify(logged_in_as=current_user), 200
+    response_body['message'] = f"Logged in as: {current_user}"
+    return response_body, 200

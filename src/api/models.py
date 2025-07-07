@@ -9,7 +9,7 @@ class Users(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-    
+
     def __repr__(self):
         return f"user: {self.id} - email: {self.email}"
 
@@ -19,26 +19,25 @@ class Users(db.Model):
                 "email": self.email,
                 "is_active": self.is_active,
                 "first_name": self.first_name,
-                "last_name": self.last_name,}
+                "last_name": self.last_name, }
 
-    class Posts(db.Model):
-        _tablename_ = 'post'
-        id = db.Colum(db.Integer, primary_key=True)
-        title = db.Colum(db.String, nullable=False)
-        description = db.Colum(db.String)
-        body = db.Colum(db.String)
-        date = db.Colum(db.Date, nullable=False)
-        image_url = db.Colum(db.String)
-        user_id = db.Colum(db.Integer, db.ForeignaKey('users.id'))
-        user_to = db.relationship(
-            'Users', back_populates="posts_to", lazy='select')
-        
-        def __repr__(self):
-            return f'<User {self.id}>'
-    
 
-    class Media(db.Model):
-        _tablename_ = 'media'
-        id = db.Colum
+class Posts(db.Model):
+    _tablename_ = 'post'
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String, nullable=False)
+    description = db.Column(db.String)
+    body = db.Column(db.String)
+    date = db.Column(db.Date, nullable=False)
+    image_url = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_to = db.relationship(
+        'Users', back_populates="posts_to", lazy='select')
 
-    
+    def __repr__(self):
+        return f'<User {self.id}>'
+
+
+# class Media(db.Model):
+#   _tablename_ = 'media'
+#    id = db.Column
