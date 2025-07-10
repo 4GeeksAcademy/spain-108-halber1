@@ -53,7 +53,7 @@ class Media(db.Model):
     media_type = db.Column(
         db.Enum('image', 'video', 'audio', name='media_type'), nullable=False)
     url = db.Column(db.String)
-    post_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_to = db.relationship('Users', back_populates="media_to", lazy='select')
 
 
@@ -61,24 +61,26 @@ class Comments(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     user_to = db.relationship('Users', back_populates="coments_to", lazy='select')
-    post_to = db.relationship('User')
+    post_to = db.relationship('Posts', back_populates="coments_to", lazy='select') 
 
 
 class Followers(db.Model):
     __tablename__ = 'folowers'
     id = db.Column(db.Integer, primary_key=True)
-    following_id = db.Column('user.id')
-    follower_id = db.Column('user.id')
+    following_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    followin_to = db.relationship('Users', back_populates="user_following_to")
+    follower_to = db.relationship('Users', back_populates="user_follower_to")
 
 
 class CharacterFavorites(db.Model):
     __tablename__ = 'characterfavorites'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    post_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'))
 
 
