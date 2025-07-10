@@ -5,6 +5,7 @@ db = SQLAlchemy()
 
 
 class Users(db.Model):
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
@@ -31,7 +32,7 @@ class Users(db.Model):
 
 
 class Posts(db.Model):
-    _tablename_ = 'post'
+    __tablename__ = 'post'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String)
@@ -47,17 +48,17 @@ class Posts(db.Model):
 
 
 class Media(db.Model):
-    _tablename_ = 'media'
+    __tablename__ = 'media'
     id = db.Column(db.Integer, primary_key=True)
     media_type = db.Column(
         db.Enum('image', 'video', 'audio', name='media_type'), nullable=False)
     url = db.Column(db.String)
     post_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    post_to = db.relatrionship('Users', back_populates="media_to", lazy='select')
+    post_to = db.relationship('Users', back_populates="media_to", lazy='select')
 
 
 class Comments(db.Model):
-    _tablename_ = 'comments'
+    __tablename__ = 'comments'
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -67,14 +68,14 @@ class Comments(db.Model):
 
 
 class Followers(db.Model):
-    _tablename_ = 'folowers'
+    __tablename__ = 'folowers'
     id = db.Column(db.Integer, primary_key=True)
     following_id = db.Column('user.id')
     follower_id = db.Column('user.id')
 
 
 class CharacterFavorites(db.Model):
-    _tablename_ = 'characterfavorites'
+    __tablename__ = 'characterfavorites'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -82,7 +83,7 @@ class CharacterFavorites(db.Model):
 
 
 class Characters(db.Model):
-    _tablename_ = 'characters'
+    __tablename__ = 'characters'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     height = db.Column(db.String)
@@ -94,7 +95,7 @@ class Characters(db.Model):
     gender = db.Column(db.String)
          
 class PlanetFavorites(db.Model):
-    _tablename_ = 'planetfavorites'
+    __tablename__ = 'planetfavorites'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -102,7 +103,7 @@ class PlanetFavorites(db.Model):
     
 
 class Planets(db.Model):
-    _tablename_ = 'planets'
+    __tablename__ = 'planets'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)
     diameter = db.Column(db.String)
