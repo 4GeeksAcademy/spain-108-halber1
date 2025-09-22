@@ -1,0 +1,90 @@
+body {
+  background-color: black;
+}
+
+
+
+.containerLayout {
+    display: flex;
+
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: max-content;
+
+    margin: 2rem;
+    background-color: black;
+}
+
+.containerPlanetas {
+  background-image: url('https://img.freepik.com/foto-gratis/fondo-hiperespacial-3d-efecto-tunel-urdimbre_1048-12526.jpg?semt=ais_hybrid&w=740');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+}
+
+.containerPersonajes {
+  background-image: url('https://alternativaseconomicas.coop/sites/default/files/shared/publicaciones/revistas/2016/32/fotos/starwars.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh; 
+}
+.containerNavbar {
+  background-image: url('https://media.istockphoto.com/id/2183286764/es/foto/space-galaxy-explosion-of-stars-science-fiction-bacground.jpg?s=612x612&w=0&k=20&c=19ZVf1PmYc4zrym-BKYf0e39q60nlQn6wKoMyWL8b-M=');
+  background-size:cover;
+  background-position:center ;
+  background-repeat:round;
+  min-height: 15vh; 
+  min-width: 100%;}
+
+.containerDetail {
+  background-image: url('');
+  background-size:cover;
+  background-position:center ;
+  background-repeat:round;}
+
+.containerStarships{
+   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJvlGYEitgttl6wZrgKB30EPJTEQZlS8zt5A&s');
+  background-size:cover;
+  background-position:center ;
+  background-repeat:round;
+  min-height: 15vh; 
+  min-width: 100%;
+}
+
+
+
+
+
+.flex-fill {
+    flex: 1;
+}
+.card {
+  min-width: 18rem; 
+  max-width: 18rem;
+  flex-shrink: 0; 
+}
+
+.cards {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.card-img {
+  width: 50%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+
+/* https://blog.camaralia.com/wp-content/uploads/2016/01/Star-Wars-Blu-ray1.jpg */
+
+/* .container {
+  width: 100%;
+  padding: 20px;
+  overflow-x: auto;
+} */

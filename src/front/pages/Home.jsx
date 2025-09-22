@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
-import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { Cards } from "./Cards.jsx";
 
 export const Home = () => {
 
@@ -33,20 +33,28 @@ export const Home = () => {
 	}, [])
 
 	return (
-		<div className="text-center mt-5">
-			<h1 className="display-4">Hello Rigo!!</h1>
-			<p className="lead">
-				<img src={rigoImageUrl} className="img-fluid rounded-circle mb-3" alt="Rigo Baby" />
-			</p>
-			<div className="alert alert-info">
-				{store.message ? (
-					<span>{store.message}</span>
-				) : (
-					<span className="text-danger">
-						Loading message from the backend (make sure your python 🐍 backend is running)...
-					</span>
-				)}
+
+		<div id="carouselExample" className="carousel slide" data-bs-ride="carousel">
+			<div className="carousel-inner">
+				<div className="carousel-item active">
+					<img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/05/saga-skywalker-star-wars-2347755.jpg?tf=1200x" className="d-block w-100" alt="imagen1" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2023/02/mandalorian-2964862.jpg?tf=1200x" className="d-block w-100" alt="imagen2" />
+				</div>
+				<div className="carousel-item">
+					<img src="https://cdn.hobbyconsolas.com/sites/navi.axelspringer.es/public/media/image/2021/07/star-wars-yoda-retorno-jedi-2399715.jpg?tf=1200x" className="d-block w-100" alt="imagen3" />
+				</div>
 			</div>
+			<button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+				<span className="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span className="visually-hidden">Previous</span>
+			</button>
+			<button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+				<span className="carousel-control-next-icon" aria-hidden="true"></span>
+				<span className="visually-hidden">Next</span>
+			</button>
 		</div>
+
 	);
 }; 
